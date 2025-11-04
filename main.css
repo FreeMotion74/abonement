@@ -487,14 +487,19 @@ input[type="date"]:valid {
     color: var(--purple-light);
 }
 
-
+.inf {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
 #save-time {
     display: flex;
     font-size: 15px;
     color: var(--purple-light);
-    margin-top: 20px;
+    margin: 20px 0;
     justify-content: center;
 }
+
 
 
 .expenses-table {
