@@ -90,36 +90,37 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
 
 
-        // === Ограничение ввода в числовые поля ===
-        document.addEventListener("input", e => {
-            const input = e.target;
-            if (input.tagName === "INPUT" && input.type === "number") {
-                let v = input.value;
+// === Ограничение ввода в числовые поля (без дёрганья) ===
+document.addEventListener("input", e => {
+  const input = e.target;
+  if (input.tagName === "INPUT" && input.type === "number") {
+    const oldValue = input.value;
 
-                // Удаляем всё, кроме цифр
-                v = v.replace(/\D/g, "");
+    // фильтрация
+    let v = oldValue.replace(/\D/g, "");
+    v = v.replace(/^0+/, "");
+    if (v.length > 4) v = v.slice(0, 4);
 
-                // Убираем ведущие нули (кроме одного, если нужно пустое поле)
-                v = v.replace(/^0+/, "");
+    // если реально изменилось — обновляем и пересчитываем
+    if (v !== oldValue) {
+      input.value = v;
+      document.dispatchEvent(new CustomEvent("recalcNeeded"));
+    }
+  }
+});
 
-                // Ограничиваем длину — максимум 4 цифры
-                if (v.length > 4) v = v.slice(0, 4);
-
-                // Записываем обратно
-                input.value = v;
-            }
-        });
-
-        // === Дополнительно: запрещаем ввод "-" и "e" в number-поле ===
-        document.addEventListener("keydown", e => {
-            if (e.target.tagName === "INPUT" && e.target.type === "number") {
-                if (["-", "e", "E", "+", "."].includes(e.key)) {
-                    e.preventDefault();
-                }
-            }
-        });
+// === Запрещаем ввод служебных символов ===
+document.addEventListener("keydown", e => {
+  if (e.target.tagName === "INPUT" && e.target.type === "number") {
+    if (["-", "e", "E", "+", "."].includes(e.key)) {
+      e.preventDefault();
+    }
+  }
+});
 
 
+
+        
 
 
 
@@ -290,16 +291,16 @@ document.addEventListener("DOMContentLoaded", async () => {
         </thead>
         <tbody>
           <tr>
-            <td class="number">1</td>
-            <td class="fio" contenteditable="true"></td>
-            <td><input type="date"></td>
-            <td><input type="number" name="Цена"></td>
-            <td><input type="number" name="Оплачено"></td>
-            <td><input type="number" name="Осталось" readonly></td>
-            <td><input type="date"></td>
-            <td><input type="number"></td>
-            <td><input type="date"></td>
-            <td><input type="number"></td>
+            <td class="number"></td>
+            <td contenteditable="true" class="fio" required></td>
+            <td><input type="date" required></td>
+            <td><input type="number" required name="Цена"></td>
+            <td><input type="number" required name="Оплачено"></td>
+            <td><input type="number" required name="Осталось" readonly></td>
+            <td><input type="date" required></td>
+            <td><input type="number" required></td>
+            <td><input type="date" required></td>
+            <td><input type="number" required></td>
             <td><button class="delbtn">✖</button></td>
           </tr>
         </tbody>

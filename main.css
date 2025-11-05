@@ -201,8 +201,55 @@ header .logout-btn:hover {
 border-collapse: collapse;
 border-radius: 3vh;
 overflow: hidden;
-
+table-layout: fixed;
+width: 100%;
 }
+
+
+
+
+.card-table tr{
+    height: 53px;
+    text-align: center;
+    
+}
+
+.card-table th:nth-child(1),
+.card-table td:nth-child(1) { width: 30px; }   /* № */
+
+.card-table th:nth-child(2),
+.card-table td:nth-child(2) { width: 250px; }  /* ФИО */
+
+.card-table th:nth-child(3),
+.card-table td:nth-child(3) { width: 120px; }  /* Активен */
+
+.card-table th:nth-child(4),
+.card-table td:nth-child(4) { width: 100px; }   /* Цена */
+
+.card-table th:nth-child(5),
+.card-table td:nth-child(5) { width: 100px; }  /* Оплачено */
+
+.card-table th:nth-child(6),
+.card-table td:nth-child(6) { width: 90px; }   /* Осталось */
+
+.card-table th:nth-child(7),
+.card-table td:nth-child(7) { width: 130px; }  /* Дата текущего */
+
+.card-table th:nth-child(8),
+.card-table td:nth-child(8) { width: 130px; }  /* Задолженность */
+
+.card-table th:nth-child(9),
+.card-table td:nth-child(9) { width: 120px; }  /* Дата долга */
+
+.card-table th:nth-child(10),
+.card-table td:nth-child(10) { width: 100px; } /* Оплата далее */
+
+.card-table th:nth-child(11),
+.card-table td:nth-child(11) { width: 30px; }  /* Кнопка ✖ */
+
+
+
+
 
 /* заголовки */
 .card-table th{
@@ -211,6 +258,7 @@ overflow: hidden;
     font-size: 15px;
     padding: 9px 6px;
     text-align: center;
+
 }
 
 .card-table tbody tr:hover td { 
@@ -230,10 +278,12 @@ overflow: hidden;
     line-height: 34px;
 }
 
+
+
 .fio {
     cursor: text;
     min-width: 200px;
-    
+    /* white-space: nowrap; */
 }
 
 .fio[contenteditable]:focus {
@@ -248,6 +298,7 @@ overflow: hidden;
 .fio:focus::before {
     content: "";
 }
+
 
 
 /* ячейка для денег */
